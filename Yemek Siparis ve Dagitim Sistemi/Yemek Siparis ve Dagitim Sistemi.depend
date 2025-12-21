@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1766341169 source:c:\users\zeyne\desktop\yemek-siparis-ve-dagitim-sistemi\yemek siparis ve dagitim sistemi\src\main.c
+	<stdio.h>
+	<stdlib.h>
+	"menu.h"
+
+1766341130 source:c:\users\zeyne\desktop\yemek-siparis-ve-dagitim-sistemi\yemek siparis ve dagitim sistemi\src\menu.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"menu.h"
+
+1766341123 c:\users\zeyne\desktop\yemek-siparis-ve-dagitim-sistemi\yemek siparis ve dagitim sistemi\include\menu.h
+
