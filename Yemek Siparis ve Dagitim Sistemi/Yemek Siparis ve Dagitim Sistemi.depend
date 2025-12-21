@@ -10,5 +10,13 @@
 	<string.h>
 	"menu.h"
 
-1766341123 c:\users\zeyne\desktop\yemek-siparis-ve-dagitim-sistemi\yemek siparis ve dagitim sistemi\include\menu.h
+1766342122 c:\users\zeyne\desktop\yemek-siparis-ve-dagitim-sistemi\yemek siparis ve dagitim sistemi\include\menu.h
+
+1766342154 source:c:\users\zeyne\desktop\yemek-siparis-ve-dagitim-sistemi\yemek siparis ve dagitim sistemi\src\order_queue.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"order_queue.h"
+
+1766342148 c:\users\zeyne\desktop\yemek-siparis-ve-dagitim-sistemi\yemek siparis ve dagitim sistemi\include\order_queue.h
 
