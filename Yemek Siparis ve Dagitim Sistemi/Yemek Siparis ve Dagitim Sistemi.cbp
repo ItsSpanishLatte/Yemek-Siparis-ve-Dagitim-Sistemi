@@ -30,8 +30,21 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add directory="include" />
 		</Compiler>
-		<Unit filename="main.c">
+		<Unit filename="include/delivery_queue.h" />
+		<Unit filename="include/menu.h" />
+		<Unit filename="include/order_queue.h" />
+		<Unit filename="src/delivery_queue.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/menu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/order_queue.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Extensions />
