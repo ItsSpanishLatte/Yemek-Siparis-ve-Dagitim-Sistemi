@@ -23,15 +23,17 @@ void showMainMenu() {
 }
 
 int main() {
-    MenuItem* menu = NULL;
+    // --- Program acilirken dosyadan yukle ---
+    MenuItem* menu = loadMenuFromFile();
 
     OrderQueue orderQueue;
     initOrderQueue(&orderQueue);
+    loadOrdersFromFile(&orderQueue);
 
     DeliveryQueue deliveryQueue;
     initDeliveryQueue(&deliveryQueue);
 
-    IncomeNode* incomeStack = NULL;
+    IncomeNode* incomeStack = loadIncomeFromFile();
 
     int choice;
 
@@ -146,6 +148,11 @@ int main() {
         }
 
     } while (choice != 0);
+
+    // --- Program kapanirken dosyaya kaydet ---
+    saveMenuToFile(menu);
+    saveOrdersToFile(&orderQueue);
+    saveIncomeToFile(incomeStack);
 
     printf("Programdan cikiliyor...\n");
     return 0;

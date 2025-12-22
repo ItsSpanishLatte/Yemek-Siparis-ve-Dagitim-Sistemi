@@ -105,3 +105,29 @@ MenuItem* findMenuItem(MenuItem* head, int id) {
     return NULL;
 }
 
+void saveMenuToFile(MenuItem* head) {
+    FILE* fp = fopen("menu.dat", "wb");
+    if (!fp) return;
+
+    MenuItem* temp = head;
+    while (temp) {
+        fwrite(temp, sizeof(MenuItem) - sizeof(MenuItem*), 1, fp);
+        temp = temp->next;
+    }
+    fclose(fp);
+}
+
+MenuItem* loadMenuFromFile() {
+    FILE* fp = fopen("menu.dat", "rb");
+    if (!fp) return NULL;
+
+    MenuItem* head = NULL;
+    MenuItem data;
+
+    while (fread(&data, sizeof(MenuItem) - sizeof(MenuItem*), 1, fp)) {
+        addMenuItem(&head, data.id, data.name, data.price, data.prepTime);
+    }
+
+    fclose(fp);
+    return head;
+}

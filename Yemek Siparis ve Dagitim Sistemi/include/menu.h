@@ -15,6 +15,8 @@ void listMenu(MenuItem* head);
 void deleteMenuItem(MenuItem** head, int id);
 void updateMenuItem(MenuItem* head, int id);
 MenuItem* findMenuItem(MenuItem* head, int id);
+void saveMenuToFile(MenuItem* head);
+MenuItem* loadMenuFromFile();
 
 #endif
 

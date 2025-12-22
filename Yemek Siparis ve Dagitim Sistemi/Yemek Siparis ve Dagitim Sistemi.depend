@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1766428018 source:c:\users\zeyne\desktop\yemek-siparis-ve-dagitim-sistemi\yemek siparis ve dagitim sistemi\src\main.c
+1766429120 source:c:\users\zeyne\desktop\yemek-siparis-ve-dagitim-sistemi\yemek siparis ve dagitim sistemi\src\main.c
 	<stdio.h>
 	<stdlib.h>
 	"menu.h"
@@ -7,21 +7,21 @@
 	"delivery_queue.h"
 	"income_stack.h"
 
-1766428106 source:c:\users\zeyne\desktop\yemek-siparis-ve-dagitim-sistemi\yemek siparis ve dagitim sistemi\src\menu.c
+1766428944 source:c:\users\zeyne\desktop\yemek-siparis-ve-dagitim-sistemi\yemek siparis ve dagitim sistemi\src\menu.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"menu.h"
 
-1766426419 c:\users\zeyne\desktop\yemek-siparis-ve-dagitim-sistemi\yemek siparis ve dagitim sistemi\include\menu.h
+1766428924 c:\users\zeyne\desktop\yemek-siparis-ve-dagitim-sistemi\yemek siparis ve dagitim sistemi\include\menu.h
 
-1766425639 source:c:\users\zeyne\desktop\yemek-siparis-ve-dagitim-sistemi\yemek siparis ve dagitim sistemi\src\order_queue.c
+1766428980 source:c:\users\zeyne\desktop\yemek-siparis-ve-dagitim-sistemi\yemek siparis ve dagitim sistemi\src\order_queue.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"order_queue.h"
 
-1766425639 c:\users\zeyne\desktop\yemek-siparis-ve-dagitim-sistemi\yemek siparis ve dagitim sistemi\include\order_queue.h
+1766428963 c:\users\zeyne\desktop\yemek-siparis-ve-dagitim-sistemi\yemek siparis ve dagitim sistemi\include\order_queue.h
 
 1766425639 source:c:\users\zeyne\desktop\yemek-siparis-ve-dagitim-sistemi\yemek siparis ve dagitim sistemi\src\delivery_queue.c
 	<stdio.h>
@@ -31,9 +31,9 @@
 1766425639 c:\users\zeyne\desktop\yemek-siparis-ve-dagitim-sistemi\yemek siparis ve dagitim sistemi\include\delivery_queue.h
 	"order_queue.h"
 
-1766428499 c:\users\zeyne\desktop\yemek-siparis-ve-dagitim-sistemi\yemek siparis ve dagitim sistemi\include\income_stack.h
+1766428999 c:\users\zeyne\desktop\yemek-siparis-ve-dagitim-sistemi\yemek siparis ve dagitim sistemi\include\income_stack.h
 
-1766428357 source:c:\users\zeyne\desktop\yemek-siparis-ve-dagitim-sistemi\yemek siparis ve dagitim sistemi\src\income_stack.c
+1766429017 source:c:\users\zeyne\desktop\yemek-siparis-ve-dagitim-sistemi\yemek siparis ve dagitim sistemi\src\income_stack.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

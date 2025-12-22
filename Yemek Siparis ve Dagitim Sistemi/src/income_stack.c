@@ -43,3 +43,29 @@ float calculateDailyIncome(IncomeNode* top, const char* date) {
     }
     return sum;
 }
+
+void saveIncomeToFile(IncomeNode* top) {
+    FILE* fp = fopen("income.dat", "wb");
+    if (!fp) return;
+
+    IncomeNode* temp = top;
+    while (temp) {
+        fwrite(temp, sizeof(IncomeNode) - sizeof(IncomeNode*), 1, fp);
+        temp = temp->next;
+    }
+    fclose(fp);
+}
+
+IncomeNode* loadIncomeFromFile() {
+    FILE* fp = fopen("income.dat", "rb");
+    if (!fp) return NULL;
+
+    IncomeNode* top = NULL;
+    IncomeNode data;
+
+    while (fread(&data, sizeof(IncomeNode) - sizeof(IncomeNode*), 1, fp)) {
+        pushIncome(&top, data.orderId, data.amount, data.date);
+    }
+    fclose(fp);
+    return top;
+}

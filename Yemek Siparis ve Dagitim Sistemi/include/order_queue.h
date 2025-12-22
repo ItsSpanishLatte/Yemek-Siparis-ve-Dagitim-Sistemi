@@ -21,5 +21,7 @@ void enqueueOrder(OrderQueue* q, int orderId, int foodId,
                   const char* name, const char* phone, const char* address);
 Order* dequeueOrder(OrderQueue* q);
 void listOrders(OrderQueue* q);
+void saveOrdersToFile(OrderQueue* q);
+void loadOrdersFromFile(OrderQueue* q);
 
 #endif

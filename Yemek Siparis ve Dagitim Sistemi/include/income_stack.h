@@ -15,6 +15,8 @@ typedef struct IncomeNode {
 void pushIncome(IncomeNode** top, int orderId, float amount, const char* date);
 void listIncomes(IncomeNode* top);
 float calculateDailyIncome(IncomeNode* top, const char* date);
+void saveIncomeToFile(IncomeNode* top);
+IncomeNode* loadIncomeFromFile();
 
 #ifdef __cplusplus
 }

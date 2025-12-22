@@ -65,3 +65,27 @@ void listOrders(OrderQueue* q) {
         temp = temp->next;
     }
 }
+
+void saveOrdersToFile(OrderQueue* q) {
+    FILE* fp = fopen("orders.dat", "wb");
+    if (!fp) return;
+
+    Order* temp = q->front;
+    while (temp) {
+        fwrite(temp, sizeof(Order) - sizeof(Order*), 1, fp);
+        temp = temp->next;
+    }
+    fclose(fp);
+}
+
+void loadOrdersFromFile(OrderQueue* q) {
+    FILE* fp = fopen("orders.dat", "rb");
+    if (!fp) return;
+
+    Order data;
+    while (fread(&data, sizeof(Order) - sizeof(Order*), 1, fp)) {
+        enqueueOrder(q, data.orderId, data.foodId,
+                     data.customerName, data.phone, data.address);
+    }
+    fclose(fp);
+}
