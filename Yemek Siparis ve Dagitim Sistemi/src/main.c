@@ -3,6 +3,7 @@
 #include "menu.h"
 #include "order_queue.h"
 #include "delivery_queue.h"
+#include "income_stack.h"
 
 void showMainMenu() {
     printf("\n--- Yemek Siparis ve Dagitim Sistemi ---\n");
@@ -12,10 +13,11 @@ void showMainMenu() {
     printf("4. Yemek guncelle\n");
     printf("5. Yeni siparis ekle\n");
     printf("6. Siparisleri listele\n");
-    printf("7. Siradaki siparisi hazirla\n");
-    printf("8. Hazirlanan siparisi teslimata gonder\n");
+    printf("7. Siradaki siparisi hazirla (teslimata aktar)\n");
     printf("9. Teslimat kuyrugunu listele\n");
-    printf("10. Siparisi teslim et\n");
+    printf("10. Siparisi teslim et (gelire ekle)\n");
+    printf("11. Gelir kayitlarini listele\n");
+    printf("12. Secilen gun toplam gelir\n");
     printf("0. Cikis\n");
     printf("Seciminiz: ");
 }
@@ -28,6 +30,8 @@ int main() {
 
     DeliveryQueue deliveryQueue;
     initDeliveryQueue(&deliveryQueue);
+
+    IncomeNode* incomeStack = NULL;
 
     int choice;
 
@@ -96,13 +100,9 @@ int main() {
         else if (choice == 7) {
             Order* o = dequeueOrder(&orderQueue);
             if (o != NULL) {
-                printf("Siparis hazirlandi: ID %d\n", o->orderId);
-                // hazirlanan siparis teslimata gonderilecek (8. secenek)
+                printf("Siparis hazirlandi ve teslimata aktarildi: ID %d\n", o->orderId);
                 enqueueDelivery(&deliveryQueue, o);
             }
-        }
-        else if (choice == 8) {
-            printf("Bu adim 7. secenekte otomatik yapiliyor.\n");
         }
         else if (choice == 9) {
             listDeliveries(&deliveryQueue);
@@ -110,11 +110,39 @@ int main() {
         else if (choice == 10) {
             Order* o = dequeueDelivery(&deliveryQueue);
             if (o != NULL) {
-                printf("Siparis teslim edildi: ID %d | Musteri: %s\n",
-                       o->orderId, o->customerName);
-                // burada daha sonra gelir yiginina gidecek
+                char date[20];
+                float amount = 0.0f;
+
+                printf("Siparis teslim edildi: ID %d | Musteri: %s\n", o->orderId, o->customerName);
+                printf("Tarih (YYYY-MM-DD): ");
+                scanf(" %19s", date);
+
+                MenuItem* m = findMenuItem(menu, o->foodId);
+                if (m != NULL) {
+                    amount = m->price;
+                } else {
+                    printf("Yemek bulunamadi (FoodID=%d). Tutari manuel gir: ", o->foodId);
+                    scanf("%f", &amount);
+                }
+
+                pushIncome(&incomeStack, o->orderId, amount, date);
+
+                printf("Gelire eklendi -> SiparisID: %d | Tutar: %.2f | Tarih: %s\n",
+                       o->orderId, amount, date);
+
                 free(o);
             }
+        }
+        else if (choice == 11) {
+            listIncomes(incomeStack);
+        }
+        else if (choice == 12) {
+            char date[20];
+            printf("Hangi gun? (YYYY-MM-DD): ");
+            scanf(" %19s", date);
+
+            float total = calculateDailyIncome(incomeStack, date);
+            printf("%s tarihli toplam gelir: %.2f\n", date, total);
         }
 
     } while (choice != 0);

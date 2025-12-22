@@ -14,6 +14,7 @@ void addMenuItem(MenuItem** head, int id, const char* name, float price, int pre
 void listMenu(MenuItem* head);
 void deleteMenuItem(MenuItem** head, int id);
 void updateMenuItem(MenuItem* head, int id);
+MenuItem* findMenuItem(MenuItem* head, int id);
 
 #endif
 

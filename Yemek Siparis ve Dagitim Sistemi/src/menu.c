@@ -95,3 +95,13 @@ void updateMenuItem(MenuItem* head, int id) {
 
     printf("Yemek guncellendi.\n");
 }
+
+MenuItem* findMenuItem(MenuItem* head, int id) {
+    MenuItem* temp = head;
+    while (temp) {
+        if (temp->id == id) return temp;
+        temp = temp->next;
+    }
+    return NULL;
+}
+
