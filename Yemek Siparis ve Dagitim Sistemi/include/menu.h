@@ -17,6 +17,7 @@ void updateMenuItem(MenuItem* head, int id);
 MenuItem* findMenuItem(MenuItem* head, int id);
 void saveMenuToFile(MenuItem* head);
 MenuItem* loadMenuFromFile();
+int isMenuIdExists(MenuItem* head, int id);
 
 #endif
 

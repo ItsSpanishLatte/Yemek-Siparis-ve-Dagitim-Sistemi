@@ -13,6 +13,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="include" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -31,7 +32,23 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="main.c">
+		<Unit filename="include/delivery_queue.h" />
+		<Unit filename="include/income_stack.h" />
+		<Unit filename="include/menu.h" />
+		<Unit filename="include/order_queue.h" />
+		<Unit filename="src/delivery_queue.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/income_stack.c">
+			<Option compilerVar="CPP" />
+		</Unit>
+		<Unit filename="src/main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/menu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/order_queue.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Extensions />

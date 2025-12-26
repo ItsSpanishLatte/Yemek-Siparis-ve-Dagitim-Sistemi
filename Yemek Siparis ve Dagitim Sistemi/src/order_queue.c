@@ -89,3 +89,13 @@ void loadOrdersFromFile(OrderQueue* q) {
     }
     fclose(fp);
 }
+
+int isOrderIdExists(OrderQueue* q, int orderId) {
+    Order* temp = q->front;
+    while (temp) {
+        if (temp->orderId == orderId)
+            return 1;
+        temp = temp->next;
+    }
+    return 0;
+}

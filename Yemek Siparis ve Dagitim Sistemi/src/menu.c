@@ -131,3 +131,13 @@ MenuItem* loadMenuFromFile() {
     fclose(fp);
     return head;
 }
+
+int isMenuIdExists(MenuItem* head, int id) {
+    MenuItem* temp = head;
+    while (temp) {
+        if (temp->id == id)
+            return 1;   // Var
+        temp = temp->next;
+    }
+    return 0;           // Yok
+}

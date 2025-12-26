@@ -5,10 +5,11 @@
 #include "delivery_queue.h"
 #include "income_stack.h"
 
-void showMainMenu() {
+void showMainMenu()
+{
     printf("\n--- Yemek Siparis ve Dagitim Sistemi ---\n");
     printf("1. Menuye yemek ekle\n");
-    printf("2. Menüyü listele\n");
+    printf("2. Menuyu listele\n");
     printf("3. Yemek sil\n");
     printf("4. Yemek guncelle\n");
     printf("5. Yeni siparis ekle\n");
@@ -22,7 +23,8 @@ void showMainMenu() {
     printf("Seciminiz: ");
 }
 
-int main() {
+int main()
+{
     // --- Program acilirken dosyadan yukle ---
     MenuItem* menu = loadMenuFromFile();
 
@@ -37,11 +39,13 @@ int main() {
 
     int choice;
 
-    do {
+    do
+    {
         showMainMenu();
         scanf("%d", &choice);
 
-        if (choice == 1) {
+        if (choice == 1)
+        {
             int id, prep;
             float price;
             char name[50];
@@ -49,69 +53,127 @@ int main() {
             printf("Yemek ID: ");
             scanf("%d", &id);
 
-            printf("Yemek Adi: ");
-            scanf(" %[^\n]", name);
+            if (isMenuIdExists(menu, id))
+            {
+                printf("HATA: Bu Yemek ID zaten mevcut!\n");
+            }
+            else
+            {
+                printf("Yemek Adi: ");
+                scanf(" %[^\n]", name);
 
-            printf("Fiyat: ");
-            scanf("%f", &price);
+                printf("Fiyat: ");
+                scanf("%f", &price);
 
-            printf("Hazirlama Suresi (dk): ");
-            scanf("%d", &prep);
+                printf("Hazirlama Suresi (dk): ");
+                scanf("%d", &prep);
 
-            addMenuItem(&menu, id, name, price, prep);
+                addMenuItem(&menu, id, name, price, prep);
+            }
         }
-        else if (choice == 2) {
+        else if (choice == 2)
+        {
             listMenu(menu);
         }
-        else if (choice == 3) {
+        else if (choice == 3)
+        {
             int id;
             printf("Silinecek yemek ID: ");
             scanf("%d", &id);
-            deleteMenuItem(&menu, id);
+
+            if (!isMenuIdExists(menu, id))
+            {
+                printf("HATA: Bu Yemek ID menude yok! Silme islemi yapilamadi.\n");
+            }
+            else
+            {
+                deleteMenuItem(&menu, id);
+                printf("Yemek silindi.\n");
+            }
         }
-        else if (choice == 4) {
+        else if (choice == 4)
+        {
             int id;
             printf("Guncellenecek yemek ID: ");
             scanf("%d", &id);
-            updateMenuItem(menu, id);
+
+            if (!isMenuIdExists(menu, id))
+            {
+                printf("HATA: Bu Yemek ID menude yok! Guncelleme yapilamadi.\n");
+            }
+            else
+            {
+                updateMenuItem(menu, id);
+                printf("Yemek guncellendi.\n");
+            }
         }
-        else if (choice == 5) {
+        else if (choice == 5)
+        {
             int orderId, foodId;
             char cname[50], phone[20], address[100];
 
             printf("Siparis ID: ");
             scanf("%d", &orderId);
 
-            printf("Yemek ID: ");
-            scanf("%d", &foodId);
+            if (isOrderIdExists(&orderQueue, orderId))
+            {
+                printf("HATA: Bu Siparis ID zaten mevcut!\n");
+            }
+            else
+            {
+                printf("Yemek ID: ");
+                scanf("%d", &foodId);
 
-            printf("Musteri adi: ");
-            scanf(" %[^\n]", cname);
+                if (!isMenuIdExists(menu, foodId))
+                {
+                    printf("HATA: Bu Yemek ID menude bulunmuyor!\n");
+                }
+                else
+                {
+                    printf("Musteri adi: ");
+                    scanf(" %[^\n]", cname);
 
-            printf("Telefon: ");
-            scanf(" %[^\n]", phone);
+                    printf("Telefon: ");
+                    scanf(" %[^\n]", phone);
 
-            printf("Adres: ");
-            scanf(" %[^\n]", address);
+                    printf("Adres: ");
+                    scanf(" %[^\n]", address);
 
-            enqueueOrder(&orderQueue, orderId, foodId, cname, phone, address);
+                    enqueueOrder(&orderQueue, orderId, foodId, cname, phone, address);
+                    printf("Siparis kuyruga eklendi.\n");
+                }
+            }
         }
-        else if (choice == 6) {
+        else if (choice == 6)
+        {
             listOrders(&orderQueue);
         }
-        else if (choice == 7) {
+        else if (choice == 7)
+        {
             Order* o = dequeueOrder(&orderQueue);
-            if (o != NULL) {
+            if (o == NULL)
+            {
+                printf("HATA: Hazirlanacak siparis yok! (Siparis kuyrugu bos)\n");
+            }
+            else
+            {
                 printf("Siparis hazirlandi ve teslimata aktarildi: ID %d\n", o->orderId);
                 enqueueDelivery(&deliveryQueue, o);
             }
         }
-        else if (choice == 9) {
+        else if (choice == 9)
+        {
             listDeliveries(&deliveryQueue);
         }
-        else if (choice == 10) {
+        else if (choice == 10)
+        {
             Order* o = dequeueDelivery(&deliveryQueue);
-            if (o != NULL) {
+            if (o == NULL)
+            {
+                printf("HATA: Teslim edilecek siparis yok! (Teslimat kuyrugu bos)\n");
+            }
+            else
+            {
                 char date[20];
                 float amount = 0.0f;
 
@@ -120,9 +182,12 @@ int main() {
                 scanf(" %19s", date);
 
                 MenuItem* m = findMenuItem(menu, o->foodId);
-                if (m != NULL) {
+                if (m != NULL)
+                {
                     amount = m->price;
-                } else {
+                }
+                else
+                {
                     printf("Yemek bulunamadi (FoodID=%d). Tutari manuel gir: ", o->foodId);
                     scanf("%f", &amount);
                 }
@@ -135,19 +200,28 @@ int main() {
                 free(o);
             }
         }
-        else if (choice == 11) {
+        else if (choice == 11)
+        {
             listIncomes(incomeStack);
         }
-        else if (choice == 12) {
+        else if (choice == 12)
+        {
             char date[20];
             printf("Hangi gun? (YYYY-MM-DD): ");
             scanf(" %19s", date);
 
-            float total = calculateDailyIncome(incomeStack, date);
-            printf("%s tarihli toplam gelir: %.2f\n", date, total);
+            if (incomeStack == NULL)
+            {
+                printf("Gelir kaydi yok. %s tarihli toplam gelir: 0.00\n", date);
+            }
+            else
+            {
+                float total = calculateDailyIncome(incomeStack, date);
+                printf("%s tarihli toplam gelir: %.2f\n", date, total);
+            }
         }
-
-    } while (choice != 0);
+    }
+    while (choice != 0);
 
     // --- Program kapanirken dosyaya kaydet ---
     saveMenuToFile(menu);

@@ -23,5 +23,6 @@ Order* dequeueOrder(OrderQueue* q);
 void listOrders(OrderQueue* q);
 void saveOrdersToFile(OrderQueue* q);
 void loadOrdersFromFile(OrderQueue* q);
+int isOrderIdExists(OrderQueue* q, int orderId);
 
 #endif
