@@ -141,3 +141,12 @@ int isMenuIdExists(MenuItem* head, int id) {
     }
     return 0;           // Yok
 }
+
+void freeMenu(MenuItem* head) {
+    MenuItem* cur = head;
+    while (cur) {
+        MenuItem* next = cur->next;
+        free(cur);
+        cur = next;
+    }
+}

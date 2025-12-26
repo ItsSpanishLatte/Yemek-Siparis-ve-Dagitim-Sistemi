@@ -228,6 +228,12 @@ int main()
     saveOrdersToFile(&orderQueue);
     saveIncomeToFile(incomeStack);
 
+    // --- Bellek temizligi ---
+    freeMenu(menu);
+    freeOrderQueue(&orderQueue);
+    freeDeliveryQueue(&deliveryQueue);
+    freeIncomeStack(incomeStack);
+
     printf("Programdan cikiliyor...\n");
     return 0;
 }

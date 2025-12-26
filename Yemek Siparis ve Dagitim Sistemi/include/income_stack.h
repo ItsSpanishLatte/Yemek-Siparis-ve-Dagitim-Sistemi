@@ -17,6 +17,7 @@ void listIncomes(IncomeNode* top);
 float calculateDailyIncome(IncomeNode* top, const char* date);
 void saveIncomeToFile(IncomeNode* top);
 IncomeNode* loadIncomeFromFile();
+void freeIncomeStack(IncomeNode* top);
 
 #ifdef __cplusplus
 }

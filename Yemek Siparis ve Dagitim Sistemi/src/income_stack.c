@@ -69,3 +69,12 @@ IncomeNode* loadIncomeFromFile() {
     fclose(fp);
     return top;
 }
+
+void freeIncomeStack(IncomeNode* top) {
+    IncomeNode* cur = top;
+    while (cur) {
+        IncomeNode* next = cur->next;
+        free(cur);
+        cur = next;
+    }
+}

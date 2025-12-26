@@ -13,5 +13,6 @@ int isDeliveryQueueEmpty(DeliveryQueue* q);
 void enqueueDelivery(DeliveryQueue* q, Order* order);
 Order* dequeueDelivery(DeliveryQueue* q);
 void listDeliveries(DeliveryQueue* q);
+void freeDeliveryQueue(DeliveryQueue* q);
 
 #endif

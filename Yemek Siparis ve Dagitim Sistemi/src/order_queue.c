@@ -99,3 +99,14 @@ int isOrderIdExists(OrderQueue* q, int orderId) {
     }
     return 0;
 }
+
+void freeOrderQueue(OrderQueue* q) {
+    Order* cur = q->front;
+    while (cur) {
+        Order* next = cur->next;
+        free(cur);
+        cur = next;
+    }
+    q->front = NULL;
+    q->rear = NULL;
+}
