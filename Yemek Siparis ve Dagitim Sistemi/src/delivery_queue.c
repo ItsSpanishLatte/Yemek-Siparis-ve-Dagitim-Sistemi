@@ -52,3 +52,14 @@ void listDeliveries(DeliveryQueue* q) {
         temp = temp->next;
     }
 }
+
+void freeDeliveryQueue(DeliveryQueue* q) {
+    Order* cur = q->front;
+    while (cur) {
+        Order* next = cur->next;
+        free(cur);
+        cur = next;
+    }
+    q->front = NULL;
+    q->rear = NULL;
+}

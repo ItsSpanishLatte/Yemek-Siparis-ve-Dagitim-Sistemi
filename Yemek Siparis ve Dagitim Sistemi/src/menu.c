@@ -95,3 +95,58 @@ void updateMenuItem(MenuItem* head, int id) {
 
     printf("Yemek guncellendi.\n");
 }
+
+MenuItem* findMenuItem(MenuItem* head, int id) {
+    MenuItem* temp = head;
+    while (temp) {
+        if (temp->id == id) return temp;
+        temp = temp->next;
+    }
+    return NULL;
+}
+
+void saveMenuToFile(MenuItem* head) {
+    FILE* fp = fopen("menu.dat", "wb");
+    if (!fp) return;
+
+    MenuItem* temp = head;
+    while (temp) {
+        fwrite(temp, sizeof(MenuItem) - sizeof(MenuItem*), 1, fp);
+        temp = temp->next;
+    }
+    fclose(fp);
+}
+
+MenuItem* loadMenuFromFile() {
+    FILE* fp = fopen("menu.dat", "rb");
+    if (!fp) return NULL;
+
+    MenuItem* head = NULL;
+    MenuItem data;
+
+    while (fread(&data, sizeof(MenuItem) - sizeof(MenuItem*), 1, fp)) {
+        addMenuItem(&head, data.id, data.name, data.price, data.prepTime);
+    }
+
+    fclose(fp);
+    return head;
+}
+
+int isMenuIdExists(MenuItem* head, int id) {
+    MenuItem* temp = head;
+    while (temp) {
+        if (temp->id == id)
+            return 1;   // Var
+        temp = temp->next;
+    }
+    return 0;           // Yok
+}
+
+void freeMenu(MenuItem* head) {
+    MenuItem* cur = head;
+    while (cur) {
+        MenuItem* next = cur->next;
+        free(cur);
+        cur = next;
+    }
+}
